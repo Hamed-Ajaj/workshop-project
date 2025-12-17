@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: workshop-db
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: workshop_db
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - workshop-network
+    ports:
+      - "3306:3306"
+
+networks:
+  workshop-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
